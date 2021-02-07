@@ -9,28 +9,30 @@
     tools:showIn="@layout/activity_main">
 
     <Button
-        android:layout_width="0dp"
         android:id="@+id/flash_light_btn"
+        android:layout_margin="10dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/flash_light"
         android:textAllCaps="false"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/qr_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <Button
-        android:layout_width="0dp"
         android:id="@+id/qr_btn"
+        android:layout_margin="10dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/qr_scanner"
         android:textAllCaps="false"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/flash_light_btn" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/flash_light_btn"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
