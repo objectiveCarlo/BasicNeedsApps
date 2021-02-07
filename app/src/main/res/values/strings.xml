@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BasicNeedsApps</string>
+    <string name="flash_light">Flash light</string>
+    <string name="qr_scanner">QR Scanner</string>
 </resources>
