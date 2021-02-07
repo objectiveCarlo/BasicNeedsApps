@@ -3,7 +3,9 @@ import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -36,5 +38,9 @@ class MainActivityTest {
         closeSoftKeyboard()
         onView(withId(R.id.flash_light_btn)).perform(click())
         onView(withId(R.id.qr_btn)).perform(click())
+
+
+        onView(withId(R.id.quote_textView))
+            .check(matches(withText("On")))
     }
 }

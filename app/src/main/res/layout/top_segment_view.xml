@@ -8,7 +8,7 @@
     app:layout_constraintStart_toStartOf="parent"
     tools:showIn="@layout/activity_main">
 
-    <Button
+    <ToggleButton
         android:id="@+id/flash_light_btn"
         android:layout_margin="10dp"
         android:layout_width="0dp"
