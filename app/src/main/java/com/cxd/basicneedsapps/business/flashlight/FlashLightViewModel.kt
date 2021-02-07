@@ -1,4 +1,4 @@
-package com.cxd.basicneedsapps.business.flashtlight
+package com.cxd.basicneedsapps.business.flashlight
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

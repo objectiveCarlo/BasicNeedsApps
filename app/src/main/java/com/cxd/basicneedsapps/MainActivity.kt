@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.cxd.basicneedsapps.business.flashtlight.FlashLightViewModel
+import com.cxd.basicneedsapps.business.flashlight.FlashLightViewModel
 import com.cxd.basicneedsapps.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
