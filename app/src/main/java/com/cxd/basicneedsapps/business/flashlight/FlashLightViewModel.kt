@@ -41,7 +41,19 @@ class FlashLightViewModel: ViewModel() {
     }
 
     fun onCreateAction(activity: Activity) {
-        turnOnTorch(activity)
+        if(FlashLightUtil.hasCameraFlash(activity)) {
+            if(FlashLightUtil.isPermissionGranted(activity)) {
+                turnOffTorch(activity)
+            }
+        }
+    }
+
+    fun doLastAction(activity: Activity) {
+        if (status.value == true) {
+            turnOnTorch(activity)
+        } else {
+            turnOffTorch(activity)
+        }
     }
 
 }
