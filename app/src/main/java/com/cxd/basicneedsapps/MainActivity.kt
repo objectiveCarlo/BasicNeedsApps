@@ -1,10 +1,13 @@
 package com.cxd.basicneedsapps
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.cxd.basicneedsapps.business.camera.CameraUtil
 import com.cxd.basicneedsapps.business.flashlight.FlashLightViewModel
 import com.cxd.basicneedsapps.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,8 +20,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
         torchInitActions()
+
+        binding.topSegmentView.qrBtn.setOnClickListener{
+            val myIntent = Intent(this, QRScannerActivity::class.java)
+            startActivity(myIntent)
+        }
     }
 
     private fun torchInitActions() {
@@ -31,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 flashLightViewModel.turnOffTorch(this)
             }
-            binding.quoteTextView.text = if(status) {
+            binding.quoteTextView.text = if (status) {
                 "On"
             } else {
                 "Off"
@@ -41,8 +48,13 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if(flashLightViewModel.onRequestPermissionsResultGranted(requestCode, grantResults)) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(CameraUtil.onRequestPermissionsResultGranted(requestCode, grantResults)) {
             flashLightViewModel.doLastAction(this)
         }
     }
