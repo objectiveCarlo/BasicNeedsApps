@@ -30,8 +30,8 @@ class QRCodeImageAnalyzer(private val listener: QRCodeFoundListener): ImageAnaly
             )
             val binaryBitmap = BinaryBitmap(HybridBinarizer(source))
             try {
-                val result: Result = QRCodeMultiReader().decode(binaryBitmap)
-                listener.onQRCodeFound(result.getText())
+                val result = QRCodeMultiReader().decode(binaryBitmap)
+                listener.onQRCodeFound(result.text)
             } catch (e: FormatException) {
                 listener.qrCodeNotFound()
             } catch (e: ChecksumException) {

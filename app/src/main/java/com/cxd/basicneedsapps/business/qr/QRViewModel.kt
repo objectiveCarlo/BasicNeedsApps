@@ -1,6 +1,7 @@
 package com.cxd.basicneedsapps.business.qr
 
 import android.content.Context
+import android.util.Log
 import android.util.Size
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -16,7 +17,7 @@ import com.google.common.util.concurrent.ListenableFuture
 class QRViewModel: ViewModel() {
     private var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>? = null
 
-    private fun startCamera(cameraProvider: ProcessCameraProvider, previewView: PreviewView, context: Context) {
+    fun startCamera(previewView: PreviewView, context: Context) {
         cameraProviderFuture = ProcessCameraProvider.getInstance(context);
         cameraProviderFuture!!.addListener({
             try {
@@ -49,18 +50,18 @@ class QRViewModel: ViewModel() {
         imageAnalysis.setAnalyzer(
             ContextCompat.getMainExecutor(context),
             QRCodeImageAnalyzer(object : QRCodeFoundListener {
-                override fun onQRCodeFound(_qrCode: String?) {
-
+                override fun onQRCodeFound(qrCode: String?) {
+                    qrCode?.let { Log.d("QR", it) }
                 }
 
                 override fun qrCodeNotFound() {
-
+                    Log.d("QR", "not found")
                 }
             })
         )
 
-         cameraProvider.bindToLifecycle(
-            (this as LifecycleOwner)!!,
+        val camera = cameraProvider.bindToLifecycle(
+            (context as LifecycleOwner)!!,
             cameraSelector,
             imageAnalysis,
             preview
