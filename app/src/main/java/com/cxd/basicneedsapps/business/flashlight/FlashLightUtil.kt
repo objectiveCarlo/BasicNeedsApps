@@ -43,8 +43,11 @@ object FlashLightUtil {
         return false
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+
     fun turnOnTorch(activity: Activity) {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
+            return
+        }
         val cameraManager = activity.getSystemService(Context.CAMERA_SERVICE) as CameraManager
         try {
             val cameraId = cameraManager.cameraIdList[0]
@@ -54,8 +57,11 @@ object FlashLightUtil {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+
     fun turnOffTorch(activity: Activity) {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
+            return
+        }
         val cameraManager = activity.getSystemService(Context.CAMERA_SERVICE) as CameraManager
         try {
             val cameraId = cameraManager.cameraIdList[0]
