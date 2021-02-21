@@ -3,6 +3,7 @@ package com.cxd.basicneedsapps
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.cxd.basicneedsapps.business.camera.CameraUtil
 import com.cxd.basicneedsapps.business.flashlight.FlashLightViewModel
 import com.cxd.basicneedsapps.databinding.ActivityMainBinding
 
@@ -42,7 +43,8 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if(flashLightViewModel.onRequestPermissionsResultGranted(requestCode, grantResults)) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(CameraUtil.onRequestPermissionsResultGranted(requestCode, grantResults)) {
             flashLightViewModel.doLastAction(this)
         }
     }

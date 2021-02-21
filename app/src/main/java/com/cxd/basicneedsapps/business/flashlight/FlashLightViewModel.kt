@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cxd.basicneedsapps.MainActivity
+import com.cxd.basicneedsapps.business.camera.CameraUtil
 
 class FlashLightViewModel: ViewModel() {
     val status = MutableLiveData<Boolean>()
@@ -15,34 +16,27 @@ class FlashLightViewModel: ViewModel() {
 
     fun turnOnTorch(activity: Activity) {
         if(FlashLightUtil.hasCameraFlash(activity)) {
-            if(FlashLightUtil.isPermissionGranted(activity)) {
+            if(CameraUtil.isPermissionGranted(activity)) {
                 FlashLightUtil.turnOnTorch(activity)
             } else {
-                FlashLightUtil.requestPermission(activity)
+                CameraUtil.requestPermission(activity)
             }
         }
     }
 
     fun turnOffTorch(activity: Activity) {
         if(FlashLightUtil.hasCameraFlash(activity)) {
-            if(FlashLightUtil.isPermissionGranted(activity)) {
+            if(CameraUtil.isPermissionGranted(activity)) {
                 FlashLightUtil.turnOffTorch(activity)
             } else {
-                FlashLightUtil.requestPermission(activity)
+                CameraUtil.requestPermission(activity)
             }
         }
     }
 
-    fun onRequestPermissionsResultGranted(
-            requestCode: Int,
-            grantResults: IntArray
-    ): Boolean {
-        return FlashLightUtil.onRequestPermissionsResultGranted(requestCode, grantResults)
-    }
-
     fun onCreateAction(activity: Activity) {
         if(FlashLightUtil.hasCameraFlash(activity)) {
-            if(FlashLightUtil.isPermissionGranted(activity)) {
+            if(CameraUtil.isPermissionGranted(activity)) {
                 turnOffTorch(activity)
             }
         }
