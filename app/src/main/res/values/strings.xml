@@ -2,4 +2,6 @@
     <string name="app_name">BasicNeedsApps</string>
     <string name="flash_light">Flash light</string>
     <string name="qr_scanner">QR Scanner</string>
+    <string name="torch_off">TORCH is OFF</string>
+    <string name="torch_on">TORCH is ON</string>
 </resources>
