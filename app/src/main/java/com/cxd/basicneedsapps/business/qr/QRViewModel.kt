@@ -10,12 +10,15 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.common.util.concurrent.ListenableFuture
 
 
 class QRViewModel: ViewModel() {
     private var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>? = null
+
+    val qrCode = MutableLiveData<String>()
 
     fun startCamera(previewView: PreviewView, context: Context) {
         cameraProviderFuture = ProcessCameraProvider.getInstance(context);
@@ -50,18 +53,17 @@ class QRViewModel: ViewModel() {
         imageAnalysis.setAnalyzer(
             ContextCompat.getMainExecutor(context),
             QRCodeImageAnalyzer(object : QRCodeFoundListener {
-                override fun onQRCodeFound(qrCode: String?) {
-                    qrCode?.let { Log.d("QR", it) }
+                override fun onQRCodeFound(code: String?) {
+                    code?.let { qrCode.value = it }
                 }
 
                 override fun qrCodeNotFound() {
-                    Log.d("QR", "not found")
                 }
             })
         )
 
-        val camera = cameraProvider.bindToLifecycle(
-            (context as LifecycleOwner)!!,
+        cameraProvider.bindToLifecycle(
+                (context as LifecycleOwner),
             cameraSelector,
             imageAnalysis,
             preview
