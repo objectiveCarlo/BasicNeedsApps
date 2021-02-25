@@ -11,6 +11,8 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -21,7 +23,15 @@ class MainActivityTest {
     @get:Rule
     var activityRule: ActivityScenarioRule<MainActivity>
             = ActivityScenarioRule(MainActivity::class.java)
+    @Before
+    fun before() {
+        Intents.init()
+    }
 
+    @After
+    fun after() {
+        Intents.release()
+    }
     @Test
     fun turnOnTorch() {
         onView(withId(R.id.flash_light_btn)).perform(click())
@@ -31,7 +41,6 @@ class MainActivityTest {
 
     @Test
     fun turnOnQR() {
-        Intents.init()
         onView(withId(R.id.qr_btn)).perform(click())
         intended(hasComponent(QRScannerActivity::class.java.name))
     }
