@@ -2,6 +2,8 @@ package com.cxd.basicneedsapps
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Window
+import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.cxd.basicneedsapps.business.camera.CameraUtil
@@ -17,6 +19,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        supportActionBar?.hide()
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
@@ -37,11 +41,6 @@ class MainActivity : AppCompatActivity() {
                 flashLightViewModel.turnOnTorch(this)
             } else {
                 flashLightViewModel.turnOffTorch(this)
-            }
-            binding.quoteTextView.text = if (status) {
-                "On"
-            } else {
-                "Off"
             }
         })
         flashLightViewModel.onCreateAction(this)
